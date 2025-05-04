@@ -10,8 +10,8 @@ import {
   UserOperationRequest,
 } from 'viem/account-abstraction';
 import { Address, type Client, getContract, Hex, LocalAccount } from 'viem';
-import { encodeCalls, decodeCalls } from './erc7579.utils';
-import { entryPointV08 } from './constants';
+import { encodeCalls, decodeCalls } from './erc7579.utils.js';
+import { entryPointV08 } from './constants.js';
 
 /**
  * Parameters required to create an OpenZeppelin account.
@@ -36,10 +36,10 @@ type ToOpenZeppelinAccountParameters = {
 /**
  * Creates a smart account client for an OpenZeppelin account.
  * This function bridges OpenZeppelin's Account contracts with viem's account abstraction interface.
- * 
+ *
  * @param {ToOpenZeppelinAccountParameters} parameters - The parameters to create the account
  * @returns {Promise<SmartAccount>} A smart account that can be used with viem to interact with the blockchain
- * 
+ *
  * @example
  * ```ts
  * import { createPublicClient, http, parseEther } from 'viem';
@@ -47,21 +47,21 @@ type ToOpenZeppelinAccountParameters = {
  * import { privateKeyToAccount } from 'viem/accounts';
  * import { sepolia } from 'viem/chains';
  * import { toOpenZeppelinAccount } from '@openzeppelin/accounts';
- * 
+ *
  * // Set up clients
  * const publicClient = createPublicClient({
  *   chain: sepolia,
  *   transport: http(),
  * });
- * 
+ *
  * const bundlerClient = createBundlerClient({
  *   chain: sepolia,
  *   transport: http('https://public.pimlico.io/v2/1/rpc'),
  * });
- * 
+ *
  * // Create your signer
  * const signer = privateKeyToAccount('0x...');
- * 
+ *
  * // Create an OpenZeppelin account
  * const account = await toOpenZeppelinAccount({
  *   client: publicClient,
@@ -73,7 +73,7 @@ type ToOpenZeppelinAccountParameters = {
  *   }),
  *   getStubSignature: async () => '0x...',
  * });
- * 
+ *
  * // Send a user operation through the bundler
  * const hash = await bundlerClient.sendUserOperation({
  *   account,
@@ -85,7 +85,7 @@ type ToOpenZeppelinAccountParameters = {
  *     },
  *   ],
  * });
- * 
+ *
  * // Wait for the user operation to be included
  * const receipt = await bundlerClient.waitForUserOperationReceipt({ hash });
  * console.log(`Transaction hash: ${receipt.transactionHash}`);

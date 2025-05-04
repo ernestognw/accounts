@@ -4,7 +4,7 @@
  * that use ECDSA signatures for authentication.
  */
 import { Hex } from 'viem';
-import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account';
+import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account.js';
 
 type ToOpenZeppelinECDSAAccountParameters = Omit<ToOpenZeppelinAccountParameters, 'getStubSignature'>;
 

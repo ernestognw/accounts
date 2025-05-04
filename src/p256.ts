@@ -6,7 +6,7 @@
  */
 import { Hex, PrivateKeyAccount, zeroAddress, hashMessage, hashTypedData, serializeSignature, toHex } from 'viem';
 import { PrivateKeyToAccountOptions, toAccount } from 'viem/accounts';
-import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account';
+import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account.js';
 import { secp256r1 } from '@noble/curves/p256';
 import { PrivKey } from '@noble/curves/abstract/utils';
 

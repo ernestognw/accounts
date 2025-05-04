@@ -12,7 +12,7 @@ import {
   size,
   slice,
 } from 'viem';
-import { IERC7579ExecutionABI } from './erc7579.abi';
+import { IERC7579ExecutionABI } from './erc7579.abi.js';
 
 const MODULE_TYPE_VALIDATOR = 1;
 const MODULE_TYPE_EXECUTOR = 2;

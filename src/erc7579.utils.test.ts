@@ -16,7 +16,7 @@ import {
   decodeDelegate,
   encodeCalls,
   decodeCalls,
-} from './erc7579.utils';
+} from './erc7579.utils.js';
 
 function hexa(): fc.Arbitrary<string> {
   const items = '0123456789abcdef';

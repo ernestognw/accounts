@@ -6,7 +6,7 @@
  */
 import { concat, Hex, PrivateKeyAccount, zeroAddress, hashMessage, fromBytes, hashTypedData } from 'viem';
 import { PrivateKeyToAccountOptions, toAccount } from 'viem/accounts';
-import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account';
+import { toOpenZeppelinAccount, ToOpenZeppelinAccountParameters } from './account.js';
 import { createPublicKey, privateEncrypt } from 'crypto';
 import { type KeyObject } from 'crypto';
 
