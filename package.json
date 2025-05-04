@@ -9,8 +9,8 @@
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rimraf dist",
-    "lint": "eslint . --ignore-path .gitignore --max-warnings 0",
-    "lint:fix": "eslint . --ignore-path .gitignore --max-warnings 0 --fix",
+    "lint": "eslint . --ignore-pattern .gitignore --max-warnings 0",
+    "lint:fix": "eslint . --ignore-pattern .gitignore --max-warnings 0 --fix",
     "test": "ava",
     "test:watch": "ava -w",
     "test:coverage": "c8 npm run test --"
@@ -37,6 +37,7 @@
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
     "fast-check": "^4.1.1",
+    "globals": "^16.0.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",

@@ -4,7 +4,6 @@
  * using viem.
  */
 import {
-  EntryPointVersion,
   getUserOperationHash,
   toSmartAccount,
   ToSmartAccountParameters,
