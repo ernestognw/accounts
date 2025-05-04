@@ -9,8 +9,8 @@
     "compile": "tsc",
     "compile:watch": "tsc -w",
     "clean": "rimraf dist",
-    "lint": "eslint . --ignore-pattern .gitignore --max-warnings 0",
-    "lint:fix": "eslint . --ignore-pattern .gitignore --max-warnings 0 --fix",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --max-warnings 0 --fix",
     "test": "ava",
     "test:watch": "ava -w",
     "test:coverage": "c8 npm run test --"
@@ -29,6 +29,7 @@
     "viem": "^2.28.1"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.25.1",
     "@fast-check/ava": "^2.0.2",
     "ava": "^6.2.0",
