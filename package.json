@@ -16,7 +16,7 @@
     "clean": "rimraf dist",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
-    "test": "ava",
+    "test": "npm run compile && ava",
     "test:watch": "ava -w",
     "test:coverage": "c8 npm run test --"
   },
