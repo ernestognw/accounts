@@ -1,0 +1,14 @@
+{
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "./docs/pages/api/reference",
+  "fileExtension": ".mdx",
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  "parametersFormat": "table",
+  "interfacePropertiesFormat": "table",
+  "classPropertiesFormat": "table",
+  "typeAliasPropertiesFormat": "table",
+  "enumMembersFormat": "table",
+  "propertyMembersFormat": "table",
+  "typeDeclarationFormat": "table"
+}
