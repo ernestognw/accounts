@@ -82,13 +82,22 @@ const decodeBatch = (data: Hex) =>
 
 const encodeDelegate = (target: Address, data: Hex = '0x') => encodePacked(['address', 'bytes'], [target, data]);
 
-const encodeCalls = async (calls: readonly Call[]) =>
-  encodeFunctionData({
+const decodeDelegate = (data: Hex): Execution => ({
+  target: slice(data, 0, 20),
+  callData: size(data) > 20 ? slice(data, 20) : '0x',
+  value: 0n,
+});
+
+const encodeCalls = async (calls: readonly Call[]) => {
+  const isBatch = calls.length > 1;
+  return encodeFunctionData({
     abi: IERC7579ExecutionABI,
     functionName: 'execute',
     args: [
-      encodeMode(),
-      calls.length > 0
+      encodeMode({
+        callType: isBatch ? CALL_TYPE_BATCH : CALL_TYPE_CALL,
+      }),
+      isBatch
         ? encodeBatch(
             ...calls.map<Execution>(({ to, value, data }) => ({
               target: to,
@@ -99,6 +108,7 @@ const encodeCalls = async (calls: readonly Call[]) =>
         : encodeSingle(calls[0]!.to, calls[0]!.value, calls[0]!.data),
     ],
   });
+};
 
 const decodeCalls = async (data: Hex) => {
   const { args } = decodeFunctionData({
@@ -106,11 +116,24 @@ const decodeCalls = async (data: Hex) => {
     data,
   });
   const [mode, executionCalldata] = args;
-  const batch =
-    BigInt(decodeMode(mode).callType) === BigInt(CALL_TYPE_DELEGATE)
-      ? decodeBatch(executionCalldata)
-      : [decodeSingle(executionCalldata)];
-  return batch.map(({ target, value, callData }) => ({
+  let batch: Execution | Execution[];
+  switch (decodeMode(mode).callType) {
+    case CALL_TYPE_DELEGATE: {
+      batch = decodeDelegate(executionCalldata);
+      break;
+    }
+    case CALL_TYPE_BATCH: {
+      batch = decodeBatch(executionCalldata);
+      break;
+    }
+    case CALL_TYPE_CALL: {
+      batch = decodeSingle(executionCalldata);
+      break;
+    }
+    default:
+      throw new Error('Unrecognized call type');
+  }
+  return (Array.isArray(batch) ? batch : [batch]).map(({ target, value, callData }) => ({
     to: target,
     value,
     data: callData,
@@ -136,6 +159,7 @@ export {
   encodeBatch,
   decodeBatch,
   encodeDelegate,
+  decodeDelegate,
   encodeCalls,
   decodeCalls,
 };
